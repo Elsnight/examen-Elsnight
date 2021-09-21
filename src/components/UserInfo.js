@@ -30,7 +30,7 @@ import {useEffect, useState} from "react";
 
 const UserInfo = () => {
 
-    const [user,setUser] = useState(null);
+    const [user,setUser] = useState(1);
 
     //llamda auna fuente de datos externa
     useEffect ( () =>  {
@@ -70,10 +70,10 @@ const UserInfo = () => {
 
         <div> <strong> Nombre:</strong>{user.name}</div>
         <div> <strong> Username:</strong>{user.username}</div>
-        <div> <strong> Email:</strong>{" "}
-            <a href={`mailto: ${user.email}`}>{user.email}</a></div>
-        <div> <strong> Direccion:</strong>{user.address.street},{user.address.suite} ,{""}
-            {user.address.city},{user.address.zipcode}</div>
+        {/*<div> <strong> Email:</strong>{" "}*/}
+        {/*    <a href={`mailto: ${user.email}`}>{user.email}</a></div>*/}
+        {/*<div> <strong> Direccion:</strong>{user.address.street},{user.address.suite} ,{""}*/}
+        {/*    {user.address.city},{user.address.zipcode}</div>*/}
         <div> <strong> Telefono:</strong>{user.phone}</div>
         <div> <strong> Website:</strong> <a href={user.website}>{user.website}</a></div>
         
