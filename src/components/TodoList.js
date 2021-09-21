@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {findByDisplayValue} from "@testing-library/react";
 
 const initialTask = [
     {id:1,task: 'Lavar la ropa'},
@@ -10,7 +11,9 @@ const TodoList = () => {
 
     const [tasks,setTasks]=useState(initialTask);
     const [error,setError] = useState(null);
-    const [ completed,setCompleted] = useState([])
+    const [ completed,setCompleted] = useState([]);
+
+    const [ windowWidth, setWindowWidth ] = React.useState( window.innerWidth );
 
     const handleAddTask = () => {
         //VALOR DE LO INPUTS
@@ -62,9 +65,25 @@ const TodoList = () => {
 
         //vaciar p[antalla de nombre y apellido
         document.querySelector("#task").value=" ";
-
-
     }
+
+    useEffect( () => {
+        console.log("Ejecución del efecto");
+        window.addEventListener("resize", handleResize);
+
+
+        //SE DESMONTA EL COMPONENTEN
+        return () => {
+            console.log("SE DEMSONTO EL COMPPONENTE");
+            window.removeEventListener("resize",handleResize);
+        };
+      },[]);
+
+    const handleResize = () =>{
+        console.log("handleResize",windowWidth)
+        setWindowWidth(window.innerWidth)
+    }
+
 
     //Eliminar tareas
     const handleDeleteTask = (index) => {
@@ -130,8 +149,9 @@ const TodoList = () => {
                         { task.task }
                     </li>))}
             </ul>
-
+        <div>Ancho de la ventana: { windowWidth }</div>
         </div>
+
     );
 };
 
